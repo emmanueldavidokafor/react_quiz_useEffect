@@ -5,16 +5,29 @@ import QuestionTimer from './QuestionTimer';
 
 export default function Quiz() {
     const [userAnswers, setUserAnswers] = useState([]);
+    const [answerState, setAnswerState] = useState('');
 
-    const activeQuestionIndex = userAnswers.length;
+    const activeQuestionIndex = answerState === '' ? userAnswers.length : userAnswers.length - 1;
     const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
     const handleSelectAnswer = useCallback( function handleSelectAnswer(selectAnswer) {
+        setAnswerState('Answered');
         setUserAnswers((prevUserAnswers) => {
             return [...prevUserAnswers, selectAnswer];
         });
         
-    }, []);
+        setTimeout(() => {
+            if (selectAnswer === QUESTIONS[activeQuestionIndex].answers[0]) {
+                setAnswerState('Correct');
+            } else {
+                selectAnswer('Wrong');
+            }
+
+            setTimeout(() => {
+                setAnswerState('');
+            }, 2000);
+        }, 1000);
+    }, [activeQuestionIndex]);
 
     const handleSkipAnswer = useCallback(() => handleSelectAnswer(null), [handleSelectAnswer]);
 
