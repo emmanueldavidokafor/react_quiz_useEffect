@@ -18,9 +18,9 @@ export default function Quiz() {
         
         setTimeout(() => {
             if (selectAnswer === QUESTIONS[activeQuestionIndex].answers[0]) {
-                setAnswerState('Correct');
+                setAnswerState('correct');
             } else {
-                selectAnswer('Wrong');
+                selectAnswer('wrong');
             }
 
             setTimeout(() => {
@@ -53,11 +53,23 @@ export default function Quiz() {
             />
             <h2>{QUESTIONS[activeQuestionIndex].text}</h2> 
             <ul id='answers'>
-                {shuffledAnswers.map((answer) => (
+                {shuffledAnswers.map((answer) => {
+                    const isSelected = userAnswers[userAnswers.length - 1] === answer;
+                    let cssClass = '';
+
+                    if (answerState === 'answered' && isSelected) {
+                        cssClass = 'selected';
+                    }
+
+                    if ((answerState === 'correct' || answerState === 'wrong' ) && isSelected) {
+                        cssClass = answerState;
+                    }
+                    return (
                     <li className='answer' key={answer}>
-                        <button onClick={() => handleSelectAnswer(answer)}>{answer}</button>
+                        <button onClick={() => handleSelectAnswer(answer)} className={cssClass}>{answer}</button>
                     </li>
-                ))}
+                );
+                })}
             </ul>
         </div>
     </div>
