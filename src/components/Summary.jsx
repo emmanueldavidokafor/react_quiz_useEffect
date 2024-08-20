@@ -1,6 +1,6 @@
 import React from 'react'
 import QuizCompleteImg from "../assets/quiz-complete.png";
-import QUESTIONS from './Question';
+import QUESTIONS from "../questions"; // <-- FIXED: corrected import path
 
 export default function Summary({userAnswers}) {
   const skippedAnswers = userAnswers.filter((answer) => answer === null);
@@ -41,7 +41,7 @@ export default function Summary({userAnswers}) {
                     <li key={index}>
                         <h3>{index + 1}</h3>
                         <p className='question'>{QUESTIONS[index].text}</p>
-                        <p className='question'>{answer ?? 'Skipped'}</p>
+                        <p className={cssClass}>{answer ?? 'Skipped'}</p>
                     </li>
                 );
             })}

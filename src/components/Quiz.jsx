@@ -27,7 +27,7 @@ export default function Quiz() {
         <Question 
             key={activeQuestionIndex}
             index={activeQuestionIndex}
-            onSelect={handleSelectAnswer}
+            onSelectAnswer={handleSelectAnswer} // <-- FIXED: changed from onSelect to onSelectAnswer
             onSkipAnswer={handleSkipAnswer}
         />
     </div>

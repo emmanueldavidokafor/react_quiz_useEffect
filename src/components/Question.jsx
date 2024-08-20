@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import QuestionTimer from './QuestionTimer';
 import Answers from './Answers';
 import QUESTIONS from "../questions";
-export default function Question({index, onSelectAnswer, onSkipAnswer,}) {
+
+export default function Question({index, onSelectAnswer, onSkipAnswer}) { // <-- FIXED: changed from onSelect to onSelectAnswer
     const [answer, setAnswer] = useState({
         selectedAnswer: '',
         isCorrect: null
@@ -31,7 +32,7 @@ export default function Question({index, onSelectAnswer, onSkipAnswer,}) {
             });
 
             setTimeout(() => {
-                onSelectAnswer(answer);
+                onSelectAnswer(answer); // <-- FIXED: changed from onSelect to onSelectAnswer
             }, 2000);
         }, 1000);
     }
@@ -64,4 +65,3 @@ export default function Question({index, onSelectAnswer, onSkipAnswer,}) {
     </div>
   );
 }
-
